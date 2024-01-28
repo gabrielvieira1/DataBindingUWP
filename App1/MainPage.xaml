@@ -1,0 +1,53 @@
+﻿<Page
+    x:Class="App1.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:App1"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+  <Page.Resources>
+    <local:StyleToBrushConverter x:Key="STBC" />
+  </Page.Resources>
+
+  <Grid>
+    <Grid.Resources>
+      <DataTemplate x:Key="TruckInfoDataTemplate" x:DataType="local:TruckInfo">
+        <StackPanel x:Name="TruckPanel" Background="{x:Bind Style, Converter={StaticResource STBC}}">
+          <TextBlock Text="{x:Bind ID}" />
+          <TextBlock Text="{x:Bind Name}" />
+          <TextBlock Text="{x:Bind Style}" />
+        </StackPanel>
+      </DataTemplate>
+    </Grid.Resources>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition/>
+    </Grid.RowDefinitions>
+    <StackPanel>
+      <TextBlock Text="Selected Truck:" />
+      <TextBlock Text="{x:Bind Data.SelectedTruck.Name, Mode=OneWay}" />
+      <Button Content="Add Truck" Click="Button_Click" />
+    </StackPanel>
+    <ListBox Grid.Row="1" SelectedItem="{x:Bind Data.SelectedTruckObject, Mode=TwoWay}" ItemsSource="{x:Bind Data.Trucks}" ItemTemplate="{StaticResource TruckInfoDataTemplate}" />
+    <!--<ContentControl ContentTemplate="{StaticResource TruckInfoDataTemplate}">
+    </ContentControl>-->
+    <!--<ContentControl>
+      <ContentControl.ContentTemplate>
+        <DataTemplate>
+          <StackPanel x:Name="TruckPanel">
+            -->
+    <!--<TextBlock x:Name="TruckID" />
+            <TextBlock x:Name="TruckName" />
+            <TextBlock x:Name="TruckStyle" />-->
+    <!--
+            <TextBlock Text="{Binding ID}" />
+            <TextBlock Text="{Binding Name}" />
+            <TextBlock Text="{Binding Style}" />
+          </StackPanel>
+        </DataTemplate>
+      </ContentControl.ContentTemplate>
+    </ContentControl>-->
+  </Grid>
+</Page>
